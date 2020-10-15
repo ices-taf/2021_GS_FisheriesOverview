@@ -49,14 +49,26 @@ sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status.csv")
 clean_sag <- format_sag(sag_sum, sag_refpts, 2019, "Greenland")
 clean_status <- format_sag_status(sag_status, 2019, "Greenland")
 
-# remove some stocks
-GS_Out_stocks <-  c("rjr.27.23a4", "alf.27.nea", "agn.27.nea", "ele.2737.nea", "usk.27.12ac", 
-                    "guq.27.nea", "cyo.27.nea", "bsk.27.nea", "sck.27.nea", "gag.27.nea",
-                    "por.27.nea", "anf.27.nea", "had.27.5a", "bli.27.nea", "sdv.27.nea",
-                    "gfb.27.nea", "pok.27.5a", "rja.27.nea", "sal.neac.all", "sal.nac.all",
-                    "sal.wgc.all", "hom.27.2a4a5b6a7a-ce-k8", "dgs.27.nea", "tsu.27.nea")
-clean_sag <- dplyr::filter(clean_sag, !StockKeyLabel %in% GS_Out_stocks)
-clean_status <- dplyr::filter(clean_status, !StockKeyLabel %in% GS_Out_stocks)
+# list of stocks
+GS_stocks <-  c("aru.27.5a14",
+                "usk.27.5a14",
+                "her.27.1-24a514a",
+                "rng.27.1245a8914ab",
+                "cod.2127.1f14",
+                "rhg.27.nea",
+                "cap.27.2a514",
+                "whb.27.1-91214",
+                "bli.27.5a14",
+                "pra.27.1-2",
+                "ghl.27.561214",
+                "mac.27.nea",
+                "reb.2127.dp",
+                "reb.2127.sp",
+                "reb.27.14b",
+                "reg.27.561214"
+)
+clean_sag <- dplyr::filter(clean_sag, StockKeyLabel %in% GS_stocks)
+clean_status <- dplyr::filter(clean_status, StockKeyLabel %in% GS_stocks)
              
 write.taf(clean_sag, dir = "data")
 write.taf(clean_status, dir = "data", quote = TRUE)
