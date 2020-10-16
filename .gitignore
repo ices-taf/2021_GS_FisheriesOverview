@@ -37,3 +37,8 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# TAF stuff
+/bootstrap/data/
+/bootstrap/library/
+/bootstrap/software/
