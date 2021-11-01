@@ -1,23 +1,24 @@
 
 # Initial formatting of the data
-
+library(icesTAF)
+library(icesFO)
 taf.library(icesFO)
 library(dplyr)
 
 mkdir("data")
 
 # load species list
-species_list <- read.taf("bootstrap/data/FAO_ASFIS_species/species_list.csv")
-sid <- read.taf("bootstrap/data/ICES_StockInformation/sid.csv")
+species_list <- read.taf("bootstrap/initial/data/FAO_ASFIS_species/species_list.csv")
+sid <- read.taf("bootstrap/initial/data/ICES_StockInformation/sid.csv")
 
 # 1: ICES official cath statistics
 
-hist <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_historical_catches.csv")
-official <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_2006_2017_catches.csv")
-prelim <- read.taf("bootstrap/data/ICES_nominal_catches/ICES_preliminary_catches.csv")
+hist <- read.taf("bootstrap/initial/data/ICES_nominal_catches/ICES_historical_catches.csv")
+official <- read.taf("bootstrap/initial/data/ICES_nominal_catches/ICES_2006_2019_catches.csv")
+prelim <- read.taf("bootstrap/initial/data/ICES_nominal_catches/ICES_preliminary_catches.csv")
 
 catch_dat <- 
-  format_catches(2019, "Greenland Sea", 
+  format_catches(2021, "Greenland Sea", 
     hist, official, preliminary = NULL, species_list, sid)
 
 write.taf(catch_dat, dir = "data", quote = TRUE)
@@ -42,12 +43,12 @@ write.taf(frmt_landings, dir = "data", quote = TRUE)
 
 
 # 3: SAG
-sag_sum <- read.taf("bootstrap/data/SAG_data/SAG_summary.csv")
-sag_refpts <- read.taf("bootstrap/data/SAG_data/SAG_refpts.csv")
-sag_status <- read.taf("bootstrap/data/SAG_data/SAG_status.csv")
+sag_sum <- read.taf("bootstrap/initial/data/SAG_data/SAG_summary.csv")
+sag_refpts <- read.taf("bootstrap/initial/data/SAG_data/SAG_refpts.csv")
+sag_status <- read.taf("bootstrap/initial/data/SAG_data/SAG_status.csv")
 
-clean_sag <- format_sag(sag_sum, sag_refpts, 2019, "Greenland")
-clean_status <- format_sag_status(sag_status, 2019, "Greenland")
+clean_sag <- format_sag(sag_sum, sag_refpts, 2021, "Greenland")
+clean_status <- format_sag_status(sag_status, 2021, "Greenland")
 
 # list of stocks
 GS_stocks <-  c("aru.27.5a14",
