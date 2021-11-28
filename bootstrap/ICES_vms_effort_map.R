@@ -1,8 +1,7 @@
 
 
-taf.library("icesVMS")
+library("icesVMS")
 
-# icesVMS::update_token("colin")
 vms_effort <- icesVMS::get_effort_map("Greenland Sea")
 
 # convert to sf
