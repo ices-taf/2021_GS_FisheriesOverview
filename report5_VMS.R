@@ -1,5 +1,5 @@
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(sf)
 library(ggplot2)
 library(dplyr)
@@ -68,7 +68,7 @@ write_layer(effort, file_name("effort_map")
 
 # save plot
 plot_effort_map(effort, ecoregion) +
-  ggtitle("Average MW Fishing hours 2015-2018")
+  ggtitle("Average MW Fishing hours 2017-2020")
 
 ggsave(file_name("effort_map", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
 
@@ -80,11 +80,11 @@ ggsave(file_name("effort_map", ext = "png"), path = "report", width = 170, heigh
 write_layer(sar, file_name("sar_map"))
 
 plot_sar_map(sar, ecoregion, what = "surface") +
-  ggtitle("Average surface swept area ratio 2015-2018")
+  ggtitle("Average surface swept area ratio 2017-2020")
 
 ggsave(file_name("sar_map_surface", "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
 
 plot_sar_map(sar, ecoregion, what = "subsurface") +
-  ggtitle("Average subsurface swept area ratio 2015-2018")
+  ggtitle("Average subsurface swept area ratio 2017-2020")
 
 ggsave(file_name("sar_map_subsurface", "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
