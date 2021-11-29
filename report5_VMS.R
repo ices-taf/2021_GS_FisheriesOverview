@@ -16,14 +16,14 @@ ecoreg_code <- "GS"
 #Load data
 ##########
 ecoregion <-
-  st_read(taf.data.path("ICES_ecoregions", "ecoregion.csv"),
+  st_read("ecoregion.csv",
     options = "GEOM_POSSIBLE_NAMES=WKT", crs = 4326
   )
 ecoregion <- dplyr::select(ecoregion, -WKT)
 
 # read vms fishing effort
 effort <-
-  st_read(taf.data.path("ICES_vms_effort_map", "vms_effort.csv"),
+  st_read("vms_effort.csv",
     options = "GEOM_POSSIBLE_NAMES=wkt", crs = 4326
   )
 effort <- dplyr::select(effort, -WKT)
