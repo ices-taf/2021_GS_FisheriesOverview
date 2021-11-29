@@ -70,7 +70,7 @@ write_layer(effort, paste0(year_cap, "_", ecoreg,"_FO_VMS_effort"))
 plot_effort_map(effort, ecoregion) +
   ggtitle("Average MW Fishing hours 2017-2020")
 
-ggsave(file_name("effort_map", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
+ggsave(file_name(cap_year,ecoreg_code,"VMS_effort", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
 
 # ~~~~~~~~~~~~~~~#
 # A. Swept area map
@@ -82,9 +82,9 @@ write_layer(sar, paste0(year_cap, "_", ecoreg,"_FO_VMS_sar"))
 plot_sar_map(sar, ecoregion, what = "surface") +
   ggtitle("Average surface swept area ratio 2017-2020")
 
-ggsave(file_name("sar_map_surface", "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
+ggsave(file_name(cap_year,ecoreg_code,"VMS_sarA", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
 
 plot_sar_map(sar, ecoregion, what = "subsurface") +
   ggtitle("Average subsurface swept area ratio 2017-2020")
 
-ggsave(file_name("sar_map_subsurface", "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
+ggsave(file_name(cap_year,ecoreg_code,"VMS_sarB", ext = "png"), path = "report", width = 170, height = 200, units = "mm", dpi = 300)
