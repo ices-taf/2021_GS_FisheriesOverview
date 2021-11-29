@@ -64,7 +64,7 @@ write_layer <- function(dat, fname) {
   zip(paste0("report/", fname, ".zip"), files, extras = "-j")
   file.remove(files)
 }
-write_layer(effort, file_name("effort_map")
+write_layer(effort, paste0(year_cap, "_", ecoreg,"_FO_VMS_effort"))
 
 # save plot
 plot_effort_map(effort, ecoregion) +
@@ -77,7 +77,7 @@ ggsave(file_name("effort_map", ext = "png"), path = "report", width = 170, heigh
 # ~~~~~~~~~~~~~~~#
 
 # write layer
-write_layer(sar, file_name("sar_map"))
+write_layer(sar, paste0(year_cap, "_", ecoreg,"_FO_VMS_sar"))
 
 plot_sar_map(sar, ecoregion, what = "surface") +
   ggtitle("Average surface swept area ratio 2017-2020")
