@@ -30,7 +30,7 @@ effort <- dplyr::select(effort, -WKT)
 
 # read vms swept area ratio
 sar <-
-  st_read(taf.data.path("ICES_vms_sar_map", "vms_sar.csv"),
+  st_read("vms_sar.csv",
     options = "GEOM_POSSIBLE_NAMES=wkt", crs = 4326
   )
 sar <- dplyr::select(sar, -WKT)
