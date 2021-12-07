@@ -9,7 +9,7 @@ source("bootstrap/utilities.r")
 
 # set values for automatic naming of files:
 cap_year <- 2021
-cap_month <- "October"
+cap_month <- "November"
 ecoreg_code <- "GS"
 
 ##########
@@ -65,42 +65,42 @@ write.taf(dat, file =file_name(cap_year,ecoreg_code,"SAG_Trends_crustacean", ext
 #~~~~~~~~~~~~~~~~~~~~~~~~~#
 guild <- read.taf("model/guild.csv")
 
-# For this EO, they need separate plots with all info
-
-guild2 <- guild %>% filter(Metric == "F_FMSY")
-plot_guild_trends(guild, cap_year , cap_month ,return_data = FALSE )
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"EO_GuildTrends", ext = "png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
-guild2 <- guild2 %>%filter(Year > 1978)
-plot_guild_trends(guild2, cap_year , cap_month ,return_data = FALSE )
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"EO_GuildTrends_short", ext = "png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
-
-guild3 <- guild2 %>% filter(FisheriesGuild != "MEAN")
-plot_guild_trends(guild3, cap_year, cap_month ,return_data = FALSE )
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"EO_GuildTrends_noMEAN", ext = "png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
-guild4 <- guild3 %>%filter(Year > 1978)
-plot_guild_trends(guild4, cap_year , cap_month ,return_data = FALSE )
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"EO_GuildTrends_short_noMEAN_F", ext = "png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
-
-guild2 <- guild %>% filter(Metric == "SSB_MSYBtrigger")
-guild3 <- guild2 %>% dplyr::filter(FisheriesGuild != "MEAN")
-guild4 <- guild3 %>% dplyr::filter(Year > 1978)
-
-plot_guild_trends(guild2, cap_year , cap_month ,return_data = FALSE )
-ggplot2::ggsave("2019_BI_EO_GuildTrends_short_noMEAN_SSB.png", path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
-
-plot_guild_trends(guild4, cap_year , cap_month ,return_data = FALSE )
-ggplot2::ggsave(file_name(cap_year,ecoreg_code,"EO_GuildTrends_short_noMEAN_SSB", ext = "png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+trends2 <- trends%>% filter (StockKeyLabel %in% c("cod.2127.1f14",
+                                                  "ghl.27.561214",
+                                                  "mac.27.nea",
+                                                  "her.27.1-24a514a",
+                                                  "reg.27.561214"))
+trends2 <- trends2 [,-1]
+colnames(trends2) <- c("FisheriesGuild", "Year", "Metric", "Value")
+trends3 <- trends2%>% filter(Metric == "F_FMSY")
+# guild2 <- guild %>% filter(Metric == "F_FMSY")
+plot_guild_trends(trends3, cap_year, cap_month,return_data = FALSE )
+# guild2 <- guild2 %>% filter(FisheriesGuild != "MEAN")
+# plot_guild_trends(guild2, cap_year , cap_month,return_data = FALSE )
+ggplot2::ggsave(paste0(year_cap, "_", ecoreg_code, "_EO_SAG_GuildTrends_F.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+# ggplot2::ggsave("2019_BtS_EO_GuildTrends_noMEAN_F.png", path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
 
 
-dat <- plot_guild_trends(guild, cap_year, cap_month ,return_data = TRUE)
-write.taf(dat, file =file_name(cap_year,ecoreg_code,"EO_GuildTrends", ext = "csv"), dir = "report" )
+trends3 <- trends2%>% filter(Metric == "SSB_MSYBtrigger")
 
-dat <- trends[,1:2]
-dat <- unique(dat)
-dat <- dat %>% filter(StockKeyLabel != "MEAN")
-dat2 <- sid %>% select(c(StockKeyLabel, StockKeyDescription))
-dat <- left_join(dat,dat2)
-write.taf(dat, file =file_name(cap_year,ecoreg_code,"EO_SpeciesGuild_list", ext = "csv"), dir = "report", quote=TRUE )
+# guild2 <- guild %>% filter(Metric == "SSB_MSYBtrigger")
+# guild3 <- guild2 %>% dplyr::filter(FisheriesGuild != "MEAN")
+trends3 <- trends3 %>% filter(Year > 1960)
+plot_guild_trends(trends3, cap_year, cap_month,return_data = FALSE )
+ggplot2::ggsave(paste0(year_cap, "_", ecoreg_code, "_EO_SAG_GuildTrends_SSB_1960.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+# ggplot2::ggsave(paste0(year_cap, "_", ecoreg, "_EO_SAG_GuildTrends_SSB_1900.png"), path = "report/", width = 178, height = 130, units = "mm", dpi = 300)
+
+dat <- plot_guild_trends(trends2, cap_year, cap_month ,return_data = TRUE)
+write.taf(dat, file =paste0(year_cap, "_", ecoreg_code, "_EO_SAG_GuildTrends.csv"), dir = "report" )
+
+# dat <- trends2[,1:2]
+# dat <- unique(dat)
+# dat <- dat %>% filter(FisheriesGuild != "MEAN")
+# colnames(dat) <- c("StockKeyLabel", "Year")
+# dat2 <- sid %>% select(c(StockKeyLabel, StockKeyDescription))
+# dat <- left_join(dat,dat2)
+# write.taf(dat, file =paste0(year_cap, "_", ecoreg_code, "_EO_SAG_SpeciesGuildList.csv"), dir = "report", quote = TRUE )
+
 
 #~~~~~~~~~~~~~~~#
 # B.Current catches
@@ -164,7 +164,7 @@ png(file_name(cap_year,ecoreg_code,"SAG_Current_crustacean", ext = "png"),
     res = 300)
 p1_plot<-gridExtra::grid.arrange(kobe,
                                  bar, ncol = 2,
-                                 respect = TRUE, top = "pelagic")
+                                 respect = TRUE, top = "crustacean")
 dev.off()
 
 

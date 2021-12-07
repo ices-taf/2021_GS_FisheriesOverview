@@ -47,7 +47,7 @@ sag_sum <- read.taf("bootstrap/initial/data/SAG_data/SAG_summary.csv")
 sag_refpts <- read.taf("bootstrap/initial/data/SAG_data/SAG_refpts.csv")
 sag_status <- read.taf("bootstrap/initial/data/SAG_data/SAG_status.csv")
 
-clean_sag <- format_sag(sag_sum, sag_refpts, 2021, "Greenland")
+clean_sag <- format_sag(summary, refpts, 2021, "Greenland")
 clean_status <- format_sag_status(sag_status, 2021, "Greenland")
 
 # list of stocks
