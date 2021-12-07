@@ -1,5 +1,5 @@
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(sf)
 library(ggplot2)
 library(tidyr)
@@ -58,26 +58,30 @@ catch_dat$COMMON_NAME[which(catch_dat$COMMON_NAME == "Octopuses, etc. nei")] <- 
 unique(catch_dat$GUILD)
 catch_dat$GUILD <- tolower(catch_dat$GUILD)
 unique(catch_dat$GUILD)
+catch_dat <- catch_dat %>% filter(COMMON_NAME != "Capelin")
+catch_dat <- catch_dat %>% filter(COMMON_NAME != "Northern prawn")
+catch_dat <- catch_dat %>% filter(COMMON_NAME != "Blue whiting")
 
-catch_dat2 <- catch_dat %>% filter(COMMON_NAME != "Capelin")
 
-plot_catch_trends(catch_dat2, type = "COMMON_NAME", line_count = 7, plot_type = "line")
+
+plot_catch_trends(catch_dat, type = "COMMON_NAME", line_count = 6, plot_type = "line")
 ggplot2::ggsave(file_name(cap_year,ecoreg_code,"Catches_species", ext = "png"), path = "report/", width = 200, height = 130.5, units = "mm", dpi = 300)
 
 #data
-dat <- plot_catch_trends(catch_dat2, type = "COMMON_NAME", line_count = 7, plot_type = "line", return_data = TRUE)
+dat <- plot_catch_trends(catch_dat, type = "COMMON_NAME", line_count = 9, plot_type = "line", return_data = TRUE)
 write.taf(dat, file_name(cap_year,ecoreg_code,"Catches_species", ext = "csv"), dir = "report")
 
 
 #~~~~~~~~~~~~~~~#
 # By country
 #~~~~~~~~~~~~~~~#
+catch_dat$COUNTRY[which(catch_dat$COUNTRY == "Russian Federation")] <- "Russia"
 #Plot
-plot_catch_trends(catch_dat2, type = "COUNTRY", line_count = 7, plot_type = "area")
+plot_catch_trends(catch_dat, type = "COUNTRY", line_count = 6, plot_type = "area")
 ggplot2::ggsave(file_name(cap_year,ecoreg_code,"Catches_country", ext = "png"), path = "report/", width = 200, height = 130.5, units = "mm", dpi = 300)
 
 #data
-dat <- plot_catch_trends(catch_dat2, type = "COUNTRY", line_count = 7, plot_type = "area", return_data = TRUE)
+dat <- plot_catch_trends(catch_dat, type = "COUNTRY", line_count = 10, plot_type = "area", return_data = TRUE)
 write.taf(dat, file= file_name(cap_year,ecoreg_code,"Catches_country", ext = "csv"), dir = "report")
 
 #~~~~~~~~~~~~~~~#
@@ -85,7 +89,7 @@ write.taf(dat, file= file_name(cap_year,ecoreg_code,"Catches_country", ext = "cs
 #~~~~~~~~~~~~~~~#
 
 #Plot
-plot_catch_trends(catch_dat2, type = "GUILD", line_count = 6, plot_type = "line")
+plot_catch_trends(catch_dat, type = "GUILD", line_count = 3, plot_type = "line")
 # Undefined is too big, will try to assign guild to the biggest ones
 
 check <- catch_dat %>% filter (GUILD == "undefined")
@@ -96,5 +100,5 @@ unique(check$COMMON_NAME)
 ggplot2::ggsave(file_name(cap_year,ecoreg_code,"Catches_guild", ext = "png"), path = "report/", width = 200, height = 130.5, units = "mm", dpi = 300)
 
 #data
-dat <- plot_catch_trends(catch_dat2, type = "GUILD", line_count = 5, plot_type = "line", return_data = TRUE)
+dat <- plot_catch_trends(catch_dat, type = "GUILD", line_count = 5, plot_type = "line", return_data = TRUE)
 write.taf(dat, file= file_name(cap_year,ecoreg_code,"Catches_guild", ext = "csv"), dir = "report")

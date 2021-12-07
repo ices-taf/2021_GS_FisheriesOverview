@@ -2,7 +2,7 @@
 # Initial formatting of the data
 library(icesTAF)
 library(icesFO)
-taf.library(icesFO)
+library(icesFO)
 library(dplyr)
 
 mkdir("data")
@@ -58,9 +58,9 @@ GS_stocks <-  c("aru.27.5a14",
                 "cod.2127.1f14",
                 "rhg.27.nea",
                 "cap.27.2a514",
-                "whb.27.1-91214",
+                # "whb.27.1-91214",
                 "bli.27.5a14",
-                "pra.27.1-2",
+                # "pra.27.1-2",
                 "ghl.27.561214",
                 "mac.27.nea",
                 "reb.2127.dp",

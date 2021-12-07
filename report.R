@@ -102,6 +102,9 @@ catch_dat$COMMON_NAME[which(catch_dat$COMMON_NAME == "Octopuses, etc. nei")] <- 
 unique(catch_dat$GUILD)
 catch_dat$GUILD <- tolower(catch_dat$GUILD)
 unique(catch_dat$GUILD)
+catch_dat <- catch_dat %>% filter(COMMON_NAME != "Capelin")
+catch_dat <- catch_dat %>% filter(COMMON_NAME != "Northern prawn")
+catch_dat <- catch_dat %>% filter(COMMON_NAME != "Blue whiting")
 
 
 plot_catch_trends(catch_dat, type = "COMMON_NAME", line_count = 7, plot_type = "line")

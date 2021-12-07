@@ -1,5 +1,5 @@
 library(icesTAF)
-taf.library(icesFO)
+library(icesFO)
 library(sf)
 library(ggplot2)
 library(dplyr)
@@ -179,7 +179,7 @@ write.taf(bar_dat, file =file_name(cap_year,ecoreg_code,"SAG_Current_all", ext =
 # bar <- plot_CLD_bar(top_10, guild = "All", caption = TRUE, cap_year = 2020, cap_month = "September", return_data = FALSE)
 
 # top_10 <- unique(top_10)
-kobe <- plot_kobe(catch_current, guild = "All", caption = T, cap_year = 2020, cap_month = "September", return_data = FALSE)
+kobe <- plot_kobe(catch_current, guild = "All", caption = T, cap_year, cap_month , return_data = FALSE)
 png(file_name(cap_year,ecoreg_code,"SAG_Current_all", ext = "png"),
     width = 137.32,
     height = 88.9,
